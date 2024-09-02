@@ -6,16 +6,19 @@ import Contacts from "../pages/Contacts";
 import Messages from "../pages/Messages";
 import Schedules from "../pages/Schedules";
 import Settings from "../pages/Settings";
+import FooterPage from "../pages/Footer";
+
 const App = () => {
   return (
     <div>
       <MenuBar />
       <Home />
-      <Categories />
-      <Contacts />
       <Messages />
-      <Schedules />
+      <Contacts />
+      <Categories />
       <Settings />
+      <Schedules />
+      <FooterPage />
     </div>
   );
 };

@@ -6,7 +6,7 @@ const Messages = () => {
   const { Content } = Layout;
   return (
     <Layout
-      style={{ height: "100%", padding: "10px" }}
+      style={{ height: "100%", backgroundColor: "#f1edff" }}
       className="messages"
       id="messages"
     >

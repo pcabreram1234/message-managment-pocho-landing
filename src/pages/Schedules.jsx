@@ -20,7 +20,7 @@ const Schedules = () => {
             style={{ position: "relative" }}
           >
             <Col style={{ display: "flex", justifyContent: "center" }}>
-              <Image src={SchedulesImage} preview={false} width={"90%"} />
+              <Image src={SchedulesImage} preview={false} />
             </Col>
           </Row>
         </Content>

@@ -6,7 +6,7 @@ import { handleInitConfig } from "./boot/initConfig.js";
 import ScrollToSection from "./hooks/ScrollToSection.js";
 import "../node_modules/antd/dist/antd.css";
 import "../node_modules/aos/dist/aos.css";
-
+import "./styles/App.css";
 handleInitConfig();
 ReactDOM.render(
   <React.StrictMode>
