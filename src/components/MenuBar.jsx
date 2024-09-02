@@ -8,6 +8,21 @@ const { Text } = Typography;
 
 console.log(loginUrl);
 const MenuBar = () => {
+  const handleScroll = (event) => {
+    event.preventDefault(); // Previene el comportamiento predeterminado del enlace
+
+    // Usa el atributo href para determinar la sección a la que se debe desplazar
+    const targetId = event.currentTarget.getAttribute("href").substring(1);
+    const targetElement = document.getElementById(targetId);
+
+    if (targetElement) {
+      // Desplazamiento suave al elemento con el ID correspondiente
+      targetElement.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }
+  };
   return (
     <Menu
       mode="horizontal"
@@ -20,52 +35,47 @@ const MenuBar = () => {
       }}
     >
       <Menu.Item>
-        <Link to={"home"}>
+        <a href="#home" onClick={handleScroll}>
           <Image src={Logo} width={40} preview={false} />
-        </Link>
+        </a>
       </Menu.Item>
       <Menu.Item>
-        <Link to={"messages"}>
+        <a href={"#messages"} onClick={handleScroll}>
           <Text style={{ fontSize: 20 }} strong>
             Messages
           </Text>
-        </Link>
+        </a>
       </Menu.Item>
       <Menu.Item>
-        <Link to={"contacts"}>
+        <a href={"#contacts"} onClick={handleScroll}>
           <Text strong style={{ fontSize: 20 }}>
             Contacts
           </Text>
-        </Link>
+        </a>
       </Menu.Item>
       <Menu.Item>
-        <Link to={"categories"}>
+        <a href={"#categories"} onClick={handleScroll}>
           <Text strong style={{ fontSize: 20 }}>
             Categories
           </Text>
-        </Link>
+        </a>
       </Menu.Item>
       <Menu.Item>
-        <Link to={"settings"}>
+        <a href={"#settings"} onClick={handleScroll}>
           <Text strong style={{ fontSize: 20 }}>
             Settings
           </Text>
-        </Link>
+        </a>
       </Menu.Item>
       <Menu.Item>
-        <Link to={"schedules"}>
+        <a href={"#schedules"} onClick={handleScroll}>
           <Text strong style={{ fontSize: 20 }}>
             Schedules
           </Text>
-        </Link>
+        </a>
       </Menu.Item>
       <Menu.Item>
         <GetStartedButton />
-        {/* <a href={loginUrl}>
-          <Text strong style={{ fontSize: 20, color: "white" }}>
-            Get Started
-          </Text>
-        </a> */}
       </Menu.Item>
     </Menu>
   );

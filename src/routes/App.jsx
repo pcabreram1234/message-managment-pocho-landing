@@ -10,7 +10,7 @@ import FooterPage from "../pages/Footer";
 
 const App = () => {
   return (
-    <div>
+    <>
       <MenuBar />
       <Home />
       <Messages />
@@ -19,7 +19,7 @@ const App = () => {
       <Settings />
       <Schedules />
       <FooterPage />
-    </div>
+    </>
   );
 };
 
