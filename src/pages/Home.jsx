@@ -1,6 +1,8 @@
 import React from "react";
 import { Layout, Typography, Row, Col, Image } from "antd";
 import HomeImage from "../assets/Message assets/home.svg";
+import FooterPage from "../containers/Footer";
+import Features from "../containers/Features";
 
 const Home = () => {
   const { Content, Header } = Layout;
@@ -47,6 +49,8 @@ const Home = () => {
             />
           </Col>
         </Row>
+        <Features />
+        <FooterPage />
       </Content>
     </Layout>
   );

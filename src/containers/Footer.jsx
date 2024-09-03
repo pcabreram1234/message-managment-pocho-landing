@@ -30,7 +30,7 @@ const FooterPage = () => {
               Design, Development and Testing:{" "}
               <Text strong>
                 <a href="https://portfolio.phillipcabrera.com/" target="_blank">
-                  Phillip cabrera
+                  Phillip Cabrera
                 </a>
               </Text>
             </Text>

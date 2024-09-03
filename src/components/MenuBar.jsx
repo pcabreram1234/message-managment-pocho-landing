@@ -35,11 +35,46 @@ const MenuBar = () => {
       }}
     >
       <Menu.Item>
-        <a href="#home" onClick={handleScroll}>
+        <a href="#home" onClick={handleScroll} style={{ margin: "0 10px" }}>
           <Image src={Logo} width={40} preview={false} />
+          <Text strong style={{ fontSize: 20 }}>
+            Home
+          </Text>
         </a>
       </Menu.Item>
+
       <Menu.Item>
+        <a href="#Features">
+          <Text strong style={{ fontSize: 20 }}>
+            Features
+          </Text>
+        </a>
+      </Menu.Item>
+
+      <Menu.Item>
+        <a href={"#pricing"} onClick={handleScroll}>
+          <Text style={{ fontSize: 20 }} strong>
+            Pricing
+          </Text>
+        </a>
+      </Menu.Item>
+
+      <Menu.Item>
+        <a href={"#contact"} onClick={handleScroll}>
+          <Text style={{ fontSize: 20 }} strong>
+            Conctact
+          </Text>
+        </a>
+      </Menu.Item>
+
+      <Menu.Item>
+        <a href={"#faq"} onClick={handleScroll}>
+          <Text style={{ fontSize: 20 }} strong>
+            FAQ
+          </Text>
+        </a>
+      </Menu.Item>
+      {/* <Menu.Item>
         <a href={"#messages"} onClick={handleScroll}>
           <Text style={{ fontSize: 20 }} strong>
             Messages
@@ -73,7 +108,7 @@ const MenuBar = () => {
             Schedules
           </Text>
         </a>
-      </Menu.Item>
+      </Menu.Item> */}
       <Menu.Item>
         <GetStartedButton />
       </Menu.Item>

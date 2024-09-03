@@ -1,24 +1,15 @@
 import React from "react";
 import MenuBar from "../components/MenuBar";
 import Home from "../pages/Home";
-import Categories from "../pages/Categories";
-import Contacts from "../pages/Contacts";
-import Messages from "../pages/Messages";
-import Schedules from "../pages/Schedules";
-import Settings from "../pages/Settings";
-import FooterPage from "../pages/Footer";
+import Contact from "../pages/Contact";
+import Princing from "../pages/Pricing";
 
 const App = () => {
   return (
     <>
       <MenuBar />
       <Home />
-      <Messages />
-      <Contacts />
-      <Categories />
-      <Settings />
-      <Schedules />
-      <FooterPage />
+      <Princing />
     </>
   );
 };
