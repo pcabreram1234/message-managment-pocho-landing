@@ -1,7 +1,6 @@
 import React from "react";
 import { Layout, Typography, Row, Col, Image } from "antd";
 import HomeImage from "../assets/Message assets/home.svg";
-import FooterPage from "../containers/Footer";
 import Features from "../containers/Features";
 
 const Home = () => {
@@ -13,7 +12,7 @@ const Home = () => {
       <Header
         style={{
           background: "transparent",
-          padding: "10px 0 0 0 ",
+          padding: "40px 0 0 0 ",
           textAlign: "center",
           height: "100%",
         }}
@@ -40,7 +39,11 @@ const Home = () => {
       </Content>
 
       <Content>
-        <Row align="middle" gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
+        <Row
+          align="middle"
+          gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}
+          justify="center"
+        >
           <Col>
             <Image
               src={HomeImage}
@@ -50,7 +53,6 @@ const Home = () => {
           </Col>
         </Row>
         <Features />
-        <FooterPage />
       </Content>
     </Layout>
   );

@@ -35,80 +35,38 @@ const MenuBar = () => {
       }}
     >
       <Menu.Item>
-        <a href="#home" onClick={handleScroll} style={{ margin: "0 10px" }}>
+        <Link to={"/"}>
           <Image src={Logo} width={40} preview={false} />
           <Text strong style={{ fontSize: 20 }}>
             Home
           </Text>
-        </a>
+        </Link>
       </Menu.Item>
 
       <Menu.Item>
-        <a href="#Features">
-          <Text strong style={{ fontSize: 20 }}>
-            Features
-          </Text>
-        </a>
-      </Menu.Item>
-
-      <Menu.Item>
-        <a href={"#pricing"} onClick={handleScroll}>
+        <Link to={"/pricing"}>
           <Text style={{ fontSize: 20 }} strong>
             Pricing
           </Text>
-        </a>
+        </Link>
       </Menu.Item>
 
       <Menu.Item>
-        <a href={"#contact"} onClick={handleScroll}>
+        <Link to={"/contact"}>
           <Text style={{ fontSize: 20 }} strong>
             Conctact
           </Text>
-        </a>
+        </Link>
       </Menu.Item>
 
       <Menu.Item>
-        <a href={"#faq"} onClick={handleScroll}>
+        <Link to={"/faq"}>
           <Text style={{ fontSize: 20 }} strong>
             FAQ
           </Text>
-        </a>
+        </Link>
       </Menu.Item>
-      {/* <Menu.Item>
-        <a href={"#messages"} onClick={handleScroll}>
-          <Text style={{ fontSize: 20 }} strong>
-            Messages
-          </Text>
-        </a>
-      </Menu.Item>
-      <Menu.Item>
-        <a href={"#contacts"} onClick={handleScroll}>
-          <Text strong style={{ fontSize: 20 }}>
-            Contacts
-          </Text>
-        </a>
-      </Menu.Item>
-      <Menu.Item>
-        <a href={"#categories"} onClick={handleScroll}>
-          <Text strong style={{ fontSize: 20 }}>
-            Categories
-          </Text>
-        </a>
-      </Menu.Item>
-      <Menu.Item>
-        <a href={"#settings"} onClick={handleScroll}>
-          <Text strong style={{ fontSize: 20 }}>
-            Settings
-          </Text>
-        </a>
-      </Menu.Item>
-      <Menu.Item>
-        <a href={"#schedules"} onClick={handleScroll}>
-          <Text strong style={{ fontSize: 20 }}>
-            Schedules
-          </Text>
-        </a>
-      </Menu.Item> */}
+
       <Menu.Item>
         <GetStartedButton />
       </Menu.Item>

@@ -21,13 +21,14 @@ const Contact = () => {
         <Title>Contact Us</Title>
       </Header>
 
-      <Content>
+      <Content style={{ alignContent: "center" }}>
         <Row
           gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}
           justify="center"
           align="middle"
+          style={{ height: "100%" }}
         >
-          <Col span={8}>
+          <Col span={12}>
             <Form style={{ marginTop: "10%" }} size="large">
               <Form.Item
                 name={"name"}
@@ -107,7 +108,7 @@ const Contact = () => {
             </Form>
           </Col>
 
-          <Col span={4}>
+          <Col span={10}>
             <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }} justify="center">
               <Title style={{ textAlign: "center", fontSize: "25px" }}>
                 Don't be afraid to contact us
