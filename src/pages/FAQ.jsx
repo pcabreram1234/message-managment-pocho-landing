@@ -8,17 +8,21 @@ const FAQ = () => {
 
   return (
     <Layout>
-      <Header style={{ backgroundColor: "transparent", textAlign: "center" }}>
+      <Header
+        style={{
+          backgroundColor: "transparent",
+          textAlign: "center",
+        }}
+      >
         <Title>Frequently Asked Questions</Title>
       </Header>
 
-      <Content>
-        <Row justify="center" gutter={10} align="middle">
-          <Col style={{ padding: "10px" }}>
-            <Card
-              title={"How do I register on the platform?"}
-              style={{ width: "500px" }}
-            >
+      <Content
+        style={{ display: "flex", justifyContent: "center", padding: "20px" }}
+      >
+        <Row justify="center" gutter={10} align="middle" className="FAQ_ROW">
+          <Col style={{ padding: "10px" }} flex={1}>
+            <Card title={"How do I register on the platform?"}>
               <ul className="faq_list">
                 <li>
                   <Text>
@@ -30,11 +34,8 @@ const FAQ = () => {
             </Card>
           </Col>
 
-          <Col style={{ padding: "10px" }}>
-            <Card
-              title={"How do I set up categories for my messages?"}
-              style={{ width: "500px" }}
-            >
+          <Col style={{ padding: "10px" }} flex={1}>
+            <Card title={"How do I set up categories for my messages?"}>
               <ul className="faq_list">
                 <li>
                   <Text>
@@ -47,11 +48,8 @@ const FAQ = () => {
             </Card>
           </Col>
 
-          <Col style={{ padding: "10px" }}>
-            <Card
-              title={"How do I create and manage my contacts?"}
-              style={{ width: "500px" }}
-            >
+          <Col style={{ padding: "10px" }} flex={1}>
+            <Card title={"How do I create and manage my contacts?"}>
               <ul className="faq_list">
                 <li>
                   <Text>
@@ -63,10 +61,9 @@ const FAQ = () => {
             </Card>
           </Col>
 
-          <Col style={{ padding: "10px" }}>
+          <Col style={{ padding: "10px" }} flex={1}>
             <Card
               title={"How do I schedule automatic messages for my contacts?"}
-              style={{ width: "500px" }}
             >
               <ul className="faq_list">
                 <li>
@@ -81,11 +78,8 @@ const FAQ = () => {
             </Card>
           </Col>
 
-          <Col style={{ padding: "10px" }}>
-            <Card
-              title={"Can I send personalized messages to my contacts?"}
-              style={{ width: "500px" }}
-            >
+          <Col style={{ padding: "10px" }} flex={1}>
+            <Card title={"Can I send personalized messages to my contacts?"}>
               <ul className="faq_list">
                 <li>
                   <Text>
@@ -97,11 +91,8 @@ const FAQ = () => {
             </Card>
           </Col>
 
-          <Col style={{ padding: "10px" }}>
-            <Card
-              title={"What types of messages can I send?"}
-              style={{ width: "500px" }}
-            >
+          <Col style={{ padding: "10px" }} flex={1}>
+            <Card title={"What types of messages can I send?"}>
               <ul className="faq_list">
                 <li>
                   <Text>
@@ -113,11 +104,8 @@ const FAQ = () => {
             </Card>
           </Col>
 
-          <Col style={{ padding: "10px" }}>
-            <Card
-              title={"Can I schedule recurring messages?"}
-              style={{ width: "500px" }}
-            >
+          <Col style={{ padding: "10px" }} flex={1}>
+            <Card title={"Can I schedule recurring messages?"}>
               <ul className="faq_list">
                 <li>
                   <Text>
@@ -128,11 +116,8 @@ const FAQ = () => {
             </Card>
           </Col>
 
-          <Col style={{ padding: "10px" }}>
-            <Card
-              title={"How can I check the history of sent messages?"}
-              style={{ width: "500px" }}
-            >
+          <Col style={{ padding: "10px" }} flex={1}>
+            <Card title={"How can I check the history of sent messages?"}>
               <ul className="faq_list">
                 <li>
                   <Text>
@@ -146,11 +131,8 @@ const FAQ = () => {
             </Card>
           </Col>
 
-          <Col style={{ padding: "10px" }}>
-            <Card
-              title={"How many messages can I send with my current plan?"}
-              style={{ width: "500px" }}
-            >
+          <Col style={{ padding: "10px" }} flex={1}>
+            <Card title={"How many messages can I send with my current plan?"}>
               <ul className="faq_list">
                 <li>
                   <Text>
@@ -162,12 +144,11 @@ const FAQ = () => {
             </Card>
           </Col>
 
-          <Col style={{ padding: "10px" }}>
+          <Col style={{ padding: "10px" }} flex={1}>
             <Card
               title={
                 "Is there support available if I have problems with the platform?"
               }
-              style={{ width: "500px" }}
             >
               <ul className="faq_list">
                 <li>

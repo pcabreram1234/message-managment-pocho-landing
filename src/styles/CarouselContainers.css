@@ -1,0 +1,30 @@
+#CarouselContainer > div > button.slick-arrow.slick-prev,
+#CarouselContainer > div > button.slick-arrow.slick-next {
+  font-size: 24px; /* Ajusta el tamaño de la flecha */
+  color: #000000; /* Color de la flecha */
+  border-radius: 50%; /* Bordes redondeados */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Sombra */
+  cursor: pointer; /* Cambia el cursor al pasar por encima */
+  z-index: 1000; /* Asegúrate de que esté al frente */
+  width: 40px;
+  height: 40px;
+}
+
+#CarouselContainer > div > button.slick-arrow.slick-prev::after,
+#CarouselContainer > div > button.slick-arrow.slick-next::after {
+  width: 20px;
+  height: 20px;
+  position: relative;
+}
+
+#CarouselContainer > div > button.slick-arrow.slick-next::after {
+  margin-left: -10px;
+}
+
+#CarouselContainer > div > button.slick-arrow.slick-prev {
+  left: 4vh; /* Ajusta la posición de la flecha izquierda */
+}
+
+#CarouselContainer > div > button.slick-arrow.slick-next {
+  right: 4vh; /* Ajusta la posición de la flecha derecha */
+}

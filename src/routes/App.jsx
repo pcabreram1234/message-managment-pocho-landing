@@ -3,7 +3,7 @@ import MenuBar from "../components/MenuBar";
 import Home from "../pages/Home";
 import Contact from "../pages/Contact";
 import Princing from "../pages/Pricing";
-import FAQ from "../containers/FAQ";
+import FAQ from "../pages/FAQ";
 import FooterPage from "../containers/Footer";
 import { Route, Routes } from "react-router-dom";
 import { Layout } from "antd";

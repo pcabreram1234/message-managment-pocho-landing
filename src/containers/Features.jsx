@@ -1,28 +1,30 @@
 import React from "react";
-import { Carousel, Layout } from "antd";
+import { Carousel } from "antd";
 import Contacts from "./Contacts";
 import Categories from "./Categories";
-import Messages from "./Messages";
 import Settings from "./Settings";
 import Schedules from "./Schedules";
-const Features = () => {
-  const { Content } = Layout;
+import { LeftOutlined, RightOutlined } from "@ant-design/icons";
+import "../styles/CarouselContainers.css";
 
+const Features = () => {
   return (
-    <div id="CarouselCotainer">
-      <Carousel
-        autoplay={true}
-        fade={true}
-        infinite={true}
-        draggable={true}
-        easing="cubic-bezier(0.25, 0.1, 0.25, 1)"
-      >
-        <Contacts />
-        <Categories />
-        <Settings />
-        <Schedules />
-      </Carousel>
-    </div>
+    <Carousel
+      arrows
+      autoplay
+      fade
+      infinite
+      draggable
+      dotPosition="top"
+      // prevArrow={<LeftOutlined id="custom-prev-arrow" />}
+      // nextArrow={<RightOutlined id="custom-next-arrow" />}
+      id="CarouselContainer"
+    >
+      <Contacts />
+      <Categories />
+      <Settings />
+      <Schedules />
+    </Carousel>
   );
 };
 

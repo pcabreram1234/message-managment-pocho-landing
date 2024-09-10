@@ -2,7 +2,7 @@ import React from "react";
 import { Layout, Row, Col, Image } from "antd";
 import ContactImage from "../assets/Message assets/contacts.svg";
 
-const Contacts = ({ dataAos }) => {
+const Contacts = ({}) => {
   const { Content } = Layout;
 
   return (
