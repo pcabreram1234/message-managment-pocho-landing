@@ -5,6 +5,7 @@ import Contact from "../pages/Contact";
 import Princing from "../pages/Pricing";
 import FAQ from "../pages/FAQ";
 import FooterPage from "../containers/Footer";
+import SignUp from "../pages/SignUp";
 import { Route, Routes } from "react-router-dom";
 import { Layout } from "antd";
 const App = () => {
@@ -39,6 +40,7 @@ const App = () => {
           <Route element={<Contact />} path="/contact" />
           <Route element={<Princing />} path="/pricing" />
           <Route element={<FAQ />} path="/faq" />
+          <Route element={<SignUp />} path="/signup" />
         </Routes>
       </Content>
       <Footer

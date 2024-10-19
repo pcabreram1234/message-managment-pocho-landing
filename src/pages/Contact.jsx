@@ -129,7 +129,7 @@ const Contact = () => {
                 </Text>
 
                 <ul className="contact_list">
-                  <li>Phone: +1 (829) 324-2728</li>
+                  {/* <li>Phone: +1 (829) 324-2728</li> */}
                   <li>Mail: contact@phillipcabrera.com</li>
                 </ul>
               </Space>

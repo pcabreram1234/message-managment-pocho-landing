@@ -1,22 +1,12 @@
 import React from "react";
 import { Layout, Typography, Card, Button, Row, Col } from "antd";
+import { Link } from "react-router-dom";
 
 const Princing = () => {
   const { Header, Content } = Layout;
   const { Title, Text } = Typography;
   return (
     <Layout>
-      <Header
-        style={{
-          backgroundColor: "transparent",
-          width: "100%",
-          textAlign: "center",
-          marginTop: 0,
-        }}
-      >
-        <Title>Pricing</Title>
-      </Header>
-
       <Layout
         style={{
           display: "flex",
@@ -27,6 +17,16 @@ const Princing = () => {
           flexGrow: 1, // Permite que el contenido ocupe el espacio disponible
         }}
       >
+        <Header
+          style={{
+            backgroundColor: "transparent",
+            width: "100%",
+            textAlign: "center",
+            marginTop: 0,
+          }}
+        >
+          <Title>Pricing</Title>
+        </Header>
         <Row
           justify="center"
           align="middle"
@@ -51,7 +51,9 @@ const Princing = () => {
               style={{ margin: "5px 0" }}
             >
               <Text style={{ fontSize: "25px" }}>
-                <Text strong>$0</Text>/ month
+                <Title strong>
+                  $0/<Text>Month</Text>
+                </Title>
               </Text>
             </Row>
             <Row
@@ -85,7 +87,7 @@ const Princing = () => {
                 size="large"
                 style={{ borderRadius: "10px" }}
               >
-                Register for FREE
+                <Link to={"/signup"}>Register for FREE</Link>
               </Button>
             </Row>
           </Card>

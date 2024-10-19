@@ -2,6 +2,7 @@ import React from "react";
 import { Layout, Typography, Row, Col, Image } from "antd";
 import HomeImage from "../assets/Message assets/home.svg";
 import Features from "../containers/Features";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   const { Content, Header } = Layout;
@@ -32,7 +33,8 @@ const Home = () => {
             <Paragraph strong style={{ fontSize: "20px" }}>
               Sign up and start scheduling your messages to be sent
               automatically, PMMS - Pocho`s Messages Management System is the
-              ideal tool, <a>Register free.</a>
+              ideal tool,
+              <Link to={"/signup"}>Register free.</Link>
             </Paragraph>
           </Col>
         </Row>
