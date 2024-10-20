@@ -5,8 +5,8 @@ require("dotenv").config();
 
 exports.handler = async function (req, context) {
   // Accediendo a los parámetros de la URL en una solicitud GET
-  const { content, email, user, subject } = req.body;
-  console.log(req)
+  const { content, email, user, subject } = JSON.stringify(req.body);
+  console.log(req);
 
   if (!content || !email || !user || !subject) {
     return {
