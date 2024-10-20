@@ -58,5 +58,3 @@ exports.handler = async function (message) {
     return { error: error };
   }
 };
-
-module.exports = { SendEmailService };
