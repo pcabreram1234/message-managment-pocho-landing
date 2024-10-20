@@ -3,8 +3,16 @@ const fs = require("fs");
 const path = require("path");
 require("dotenv").config();
 
-exports.handler = async function (message) {
-  const { content, email, user, subject } = message;
+exports.handler = async function (req, context) {
+  // Accediendo a los parámetros de la URL en una solicitud GET
+  const { content, email, user, subject } = req.body;
+
+  if (!content || !email || !user || !subject) {
+    return {
+      statusCode: 400,
+      body: JSON.stringify({ error: "Faltan parámetros en la solicitud" }),
+    };
+  }
 
   // Crear el transportador con la configuración necesaria
   const transporter = nodemailer.createTransport({
@@ -12,49 +20,65 @@ exports.handler = async function (message) {
     host: "smtp.gmail.com",
     secure: true,
     auth: {
-      user: "pcabreram1234@gmail.com",
-      pass: process.env.GOOGLE_APPLICATION_PASSWORD,
+      user: process.env.GOOGLE_EMAIL_USER, // Usa una variable de entorno para el usuario de Gmail
+      pass: process.env.GOOGLE_APPLICATION_PASSWORD, // Usa una variable de entorno para la contraseña
     },
   });
 
   try {
+    // Verificar la configuración del transportador
     await transporter.verify();
+
+    // Ruta del template de correo
     const templatePath = path.join(
       __dirname,
       "..",
       "/templates/",
       "mail_template.html"
     );
+
+    // Leer el template de correo
     let emailTemplate = fs.readFileSync(templatePath, "utf8");
 
+    // Reemplazar los valores en el template
     emailTemplate = emailTemplate.replace("{{SCHEDULED_MESSAGE}}", content);
     emailTemplate = emailTemplate.replace("{{User}}", user);
     emailTemplate = emailTemplate.replace("{{Subject}}", subject);
     emailTemplate = emailTemplate.replace("{{Email}}", email);
 
-    // Enviar el correo de forma asincrónica
+    // Enviar el correo
     const info = await transporter.sendMail({
       from: process.env.NODEMAILER_FROM, // Dirección del remitente
       to: email, // Dirección de destino
-      subject: "Mail of concerns or problems", // Asunto del correo
-      text: content.toString(), // Mensaje en texto plano
-      html: emailTemplate,
+      subject: subject || "Mail of concerns or problems", // Asunto del correo
+      text: content, // Mensaje en texto plano
+      html: emailTemplate, // Template en HTML
     });
 
     // Determinar el resultado basado en la respuesta del envío
-    let resp;
     if (info.messageId) {
-      resp = "sended";
-      await this.messageConfigService.updateMessagePending(id, resp);
-      console.log("Message sent: %s", info.messageId);
+      return {
+        statusCode: 200,
+        body: JSON.stringify({
+          message: "Correo enviado exitosamente",
+          messageId: info.messageId,
+        }),
+      };
     } else {
-      resp = "error";
-      console.error("Error en el envío del mensaje");
+      return {
+        statusCode: 500,
+        body: JSON.stringify({ error: "Error al enviar el correo" }),
+      };
     }
-
-    return resp;
   } catch (error) {
-    console.log(error);
-    return { error: error };
+    // Manejo de errores
+    console.error("Error al enviar el correo:", error);
+    return {
+      statusCode: 500,
+      body: JSON.stringify({
+        error: "Error al procesar la solicitud",
+        details: error.message,
+      }),
+    };
   }
 };

@@ -15,6 +15,16 @@ const Contact = () => {
   const handleInput = (e, cb) => {
     cb(e.target.value);
   };
+
+  const handleSubmit = () => {
+    fetch("https://pmms-landing.netlify.app/.netlify/functions/sendEmail", {
+      method: "POST",
+      body: {
+        req: "hola",
+        client: "nada",
+      },
+    });
+  };
   return (
     <Layout style={{ height: "100%" }}>
       <Header style={{ backgroundColor: "transparent", textAlign: "center" }}>
@@ -29,7 +39,7 @@ const Contact = () => {
           style={{ height: "100%" }}
           className="ContactContainer"
         >
-          <Col span={12} className="Form_Col" >
+          <Col span={12} className="Form_Col">
             <Form style={{ marginTop: "10%" }} size="large">
               <Form.Item
                 name={"name"}
@@ -102,6 +112,7 @@ const Contact = () => {
                   htmlType="submit"
                   size="large"
                   style={{ borderRadius: "10px" }}
+                  onClick={handleSubmit}
                 >
                   Send Message
                 </Button>
@@ -109,7 +120,7 @@ const Contact = () => {
             </Form>
           </Col>
 
-          <Col span={10} className="Text_Col" >
+          <Col span={10} className="Text_Col">
             <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }} justify="center">
               <Title style={{ textAlign: "center", fontSize: "25px" }}>
                 Don't be afraid to contact us
