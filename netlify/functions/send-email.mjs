@@ -1,40 +1,11 @@
-import * as nodemailer from "nodemailer";
-const fs = require("fs");
-const path = require("path");
-
 export default async (req, context) => {
   console.log(req);
   console.log(context);
 
-  const res = new Response();
-
-  res.headers.set(
-    "Access-Control-Allow-Origin",
-    "https://6715b159db43ab0008f9a6d5--pmms-landing.netlify.app/"
-  );
-  res.headers.append("Access-Control-Allow-Headers", "*");
-  res.headers.append("Access-Control-Allow-Methods", "*");
-
   try {
-    // const { content, email, user, subject } = req.body;
-    console.log(JSON.parse(req?.body));
+    // Lógica de procesamiento del correo
 
-    // Validación de datos
-    // if (!content || !email || !user || !subject) {
-    //   return res(
-    //     JSON.stringify(
-    //       JSON.stringify(
-    //         { error: "Faltan parámetros en la solicitud" },
-    //         {
-    //           statusCode: 400,
-    //           headers: headers,
-    //         }
-    //       )
-    //     )
-    //   );
-    // }
-
-    // Configuración del transportador (asegúrate de tener las variables de entorno configuradas)
+    // Configuración del transportador
     const transporter = nodemailer.createTransport({
       port: 465,
       host: "smtp.gmail.com",
@@ -45,51 +16,61 @@ export default async (req, context) => {
       },
     });
 
-    // Verificar la configuración del transportador
     await transporter.verify();
 
     // Leer el template y reemplazar los valores
-    const templatePath = path.join(
-      __dirname,
-      "..",
-      "templates",
-      "mail_template.html"
-    );
+    const templatePath = path.join(__dirname, "..", "templates", "mail_template.html");
     const template = fs.readFileSync(templatePath, "utf8");
     const html = template
-      .replace("{{SCHEDULED_MESSAGE}}", content)
-      .replace("{{User}}", user)
-      .replace("{{Subject}}", subject)
-      .replace("{{Email}}", email);
+      .replace("{{SCHEDULED_MESSAGE}}", req.body.content)
+      .replace("{{User}}", req.body.user)
+      .replace("{{Subject}}", req.body.subject)
+      .replace("{{Email}}", req.body.email);
 
     // Enviar el correo
     const info = await transporter.sendMail({
       from: process.env.NODEMAILER_FROM,
-      to: email,
-      subject,
+      to: req.body.email,
+      subject: req.body.subject,
       html,
     });
 
-    return res(
-      JSON.stringify(
-        {
-          message: "Correo enviado exitosamente",
-          messageId: info.messageId,
+    const res = new Response(
+      JSON.stringify({
+        message: "Correo enviado exitosamente",
+        messageId: info.messageId,
+      }),
+      {
+        status: 200,
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "https://6715b159db43ab0008f9a6d5--pmms-landing.netlify.app/",
+          "Access-Control-Allow-Headers": "*",
+          "Access-Control-Allow-Methods": "*",
         },
-        {
-          statusCode: 200,
-        }
-      )
+      }
     );
+
+    return res;
   } catch (error) {
     console.error("Error al enviar el correo:", error);
-    return res(
-      JSON.stringify(
-        { error: "Error al procesar la solicitud", details: error.message },
-        {
-          statusCode: 500,
-        }
-      )
+
+    const res = new Response(
+      JSON.stringify({
+        error: "Error al procesar la solicitud",
+        details: error.message,
+      }),
+      {
+        status: 500,
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "https://6715b159db43ab0008f9a6d5--pmms-landing.netlify.app/",
+          "Access-Control-Allow-Headers": "*",
+          "Access-Control-Allow-Methods": "*",
+        },
+      }
     );
+
+    return res;
   }
 };
