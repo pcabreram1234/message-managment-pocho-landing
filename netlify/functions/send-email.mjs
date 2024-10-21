@@ -4,6 +4,13 @@ const path = require("path");
 export default async (req, context) => {
   console.log(req);
   console.log(context);
+  const headers = {
+    "Content-Type": "application/json",
+    "Access-Control-Allow-Origin":
+      "https://6715b159db43ab0008f9a6d5--pmms-landing.netlify.app/",
+    "Access-Control-Allow-Headers": "*",
+    "Access-Control-Allow-Methods": "*",
+  };
 
   try {
     // Lógica de procesamiento del correo
@@ -50,13 +57,7 @@ export default async (req, context) => {
       }),
       {
         status: 200,
-        headers: {
-          "Content-Type": "application/json",
-          "Access-Control-Allow-Origin":
-            "https://6715b159db43ab0008f9a6d5--pmms-landing.netlify.app/",
-          "Access-Control-Allow-Headers": "*",
-          "Access-Control-Allow-Methods": "*",
-        },
+        headers: headers,
       }
     );
 
@@ -71,13 +72,7 @@ export default async (req, context) => {
       }),
       {
         status: 500,
-        headers: {
-          "Content-Type": "application/json",
-          "Access-Control-Allow-Origin":
-            "https://6715b159db43ab0008f9a6d5--pmms-landing.netlify.app/",
-          "Access-Control-Allow-Headers": "*",
-          "Access-Control-Allow-Methods": "*",
-        },
+        headers: headers,
       }
     );
 
