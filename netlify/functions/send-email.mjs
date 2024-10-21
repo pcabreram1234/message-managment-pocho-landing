@@ -1,4 +1,4 @@
-const nodemailer = require("nodemailer");
+import * as nodemailer from "nodemailer";
 const fs = require("fs");
 const path = require("path");
 
