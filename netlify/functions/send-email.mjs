@@ -2,12 +2,13 @@ import * as nodemailer from "nodemailer";
 const fs = require("fs");
 const path = require("path");
 
-export default async (event) => {
+export default async (event, context) => {
   const headers = {
     "Access-Control-Allow-Origin": "*", // Permite solicitudes desde cualquier origen (puedes restringirlo a tu dominio)
     "Access-Control-Allow-Methods": "OPTIONS, POST", // Métodos permitidos
     "Access-Control-Allow-Headers": "Content-Type", // Encabezados permitidos
   };
+  console.log(event);
   try {
     const { content, email, user, subject } = event.body;
 
