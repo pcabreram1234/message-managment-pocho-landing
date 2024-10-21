@@ -3,6 +3,11 @@ const fs = require("fs");
 const path = require("path");
 
 export default async (event) => {
+  const headers = {
+    "Access-Control-Allow-Origin": "*", // Permite solicitudes desde cualquier origen (puedes restringirlo a tu dominio)
+    "Access-Control-Allow-Methods": "OPTIONS, POST", // Métodos permitidos
+    "Access-Control-Allow-Headers": "Content-Type", // Encabezados permitidos
+  };
   try {
     const { content, email, user, subject } = event.body;
 
@@ -11,6 +16,7 @@ export default async (event) => {
       return {
         statusCode: 400,
         body: JSON.stringify({ error: "Faltan parámetros en la solicitud" }),
+        headers: headers,
       };
     }
 
@@ -50,6 +56,7 @@ export default async (event) => {
         message: "Correo enviado exitosamente",
         messageId: info.messageId,
       }),
+      headers: headers,
     };
   } catch (error) {
     console.error("Error al enviar el correo:", error);
@@ -59,6 +66,7 @@ export default async (event) => {
         error: "Error al procesar la solicitud",
         details: error.message,
       }),
+      headers: headers,
     };
   }
 };
