@@ -26,7 +26,7 @@ export default async (req, context) => {
       __dirname,
       "..",
       "templates",
-      "mail_template.html"
+      "mail-template.html"
     );
     const template = fs.readFileSync(templatePath, "utf8");
     const html = template
