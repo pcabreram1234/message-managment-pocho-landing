@@ -17,7 +17,7 @@ const Contact = () => {
   };
 
   const handleSubmit = () => {
-    fetch("https://pmms-landing.netlify.app/.netlify/functions/sendEmail", {
+    fetch("https://pmms-landing.netlify.app/.netlify/functions/send-email", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
