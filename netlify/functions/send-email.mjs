@@ -1,3 +1,6 @@
+import * as nodemailer from "nodemailer";
+const fs = require("fs");
+const path = require("path");
 export default async (req, context) => {
   console.log(req);
   console.log(context);
@@ -19,7 +22,12 @@ export default async (req, context) => {
     await transporter.verify();
 
     // Leer el template y reemplazar los valores
-    const templatePath = path.join(__dirname, "..", "templates", "mail_template.html");
+    const templatePath = path.join(
+      __dirname,
+      "..",
+      "templates",
+      "mail_template.html"
+    );
     const template = fs.readFileSync(templatePath, "utf8");
     const html = template
       .replace("{{SCHEDULED_MESSAGE}}", req.body.content)
@@ -44,7 +52,8 @@ export default async (req, context) => {
         status: 200,
         headers: {
           "Content-Type": "application/json",
-          "Access-Control-Allow-Origin": "https://6715b159db43ab0008f9a6d5--pmms-landing.netlify.app/",
+          "Access-Control-Allow-Origin":
+            "https://6715b159db43ab0008f9a6d5--pmms-landing.netlify.app/",
           "Access-Control-Allow-Headers": "*",
           "Access-Control-Allow-Methods": "*",
         },
@@ -64,7 +73,8 @@ export default async (req, context) => {
         status: 500,
         headers: {
           "Content-Type": "application/json",
-          "Access-Control-Allow-Origin": "https://6715b159db43ab0008f9a6d5--pmms-landing.netlify.app/",
+          "Access-Control-Allow-Origin":
+            "https://6715b159db43ab0008f9a6d5--pmms-landing.netlify.app/",
           "Access-Control-Allow-Headers": "*",
           "Access-Control-Allow-Methods": "*",
         },
