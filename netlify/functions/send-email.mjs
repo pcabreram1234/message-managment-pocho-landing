@@ -2,19 +2,16 @@ import * as nodemailer from "nodemailer";
 const fs = require("fs");
 const path = require("path");
 
-export default async (event, context) => {
+export default async (req, context) => {
+  console.log(req);
+  console.log(context);
   const headers = {
     "Access-Control-Allow-Origin": "*", // Permite solicitudes desde cualquier origen (puedes restringirlo a tu dominio)
     "Access-Control-Allow-Methods": "OPTIONS, POST", // Métodos permitidos
     "Access-Control-Allow-Headers": "Content-Type", // Encabezados permitidos
   };
-
   try {
-    const body = JSON.parse(event?.body);
-    console.log(body);
-    const { content, email, user, subject } = event.body
-      ? JSON.parse(event.body)
-      : {};
+    const { content, email, user, subject } = event.body;
 
     // Validación de datos
     if (!content || !email || !user || !subject) {
@@ -27,7 +24,13 @@ export default async (event, context) => {
 
     // Configuración del transportador (asegúrate de tener las variables de entorno configuradas)
     const transporter = nodemailer.createTransport({
-      // ... tu configuración de transporte
+      port: 465,
+      host: "smtp.gmail.com",
+      secure: true,
+      auth: {
+        user: "pcabreram1234@gmail.com",
+        pass: process.env.GOOGLE_APPLICATION_PASSWORD1,
+      },
     });
 
     // Verificar la configuración del transportador
@@ -61,7 +64,6 @@ export default async (event, context) => {
         message: "Correo enviado exitosamente",
         messageId: info.messageId,
       }),
-      headers: headers,
     };
   } catch (error) {
     console.error("Error al enviar el correo:", error);
@@ -71,7 +73,6 @@ export default async (event, context) => {
         error: "Error al procesar la solicitud",
         details: error.message,
       }),
-      headers: headers,
     };
   }
 };
