@@ -17,18 +17,17 @@ const Contact = () => {
   };
 
   const handleSubmit = () => {
-    fetch("https://pmms-landing.netlify.app/.netlify/functions/send-email", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        content: "Contenido del correo",
-        email: "pcabreram1234@gmail.com",
-        user: "Tu nombre",
-        subject: "Asunto del correo",
-      }),
+    const jsonData = JSON.stringify({
+      content: "Contenido del correo",
+      email: "pcabreram1234@gmail.com",
+      user: "Tu nombre",
+      subject: "Asunto del correo",
     });
+    const encodedData = encodeURIComponent(jsonData);
+    fetch(
+      "https://pmms-landing.netlify.app/.netlify/functions/send-email" +
+        encodedData
+    );
   };
   return (
     <Layout style={{ height: "100%" }}>
