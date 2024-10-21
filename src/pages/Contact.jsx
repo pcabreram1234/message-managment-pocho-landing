@@ -19,10 +19,15 @@ const Contact = () => {
   const handleSubmit = () => {
     fetch("https://pmms-landing.netlify.app/.netlify/functions/sendEmail", {
       method: "POST",
-      body: {
-        req: "hola",
-        client: "nada",
+      headers: {
+        "Content-Type": "application/json",
       },
+      body: JSON.stringify({
+        content: "Contenido del correo",
+        email: "pcabreram1234@gmail.com",
+        user: "Tu nombre",
+        subject: "Asunto del correo",
+      }),
     });
   };
   return (
