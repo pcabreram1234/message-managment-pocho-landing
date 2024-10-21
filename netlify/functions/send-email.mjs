@@ -6,7 +6,7 @@ export default async (req, context) => {
   console.log(req);
   console.log(context);
   const headers = {
-    "Access-Control-Allow-Origin": "*", // Permite solicitudes desde cualquier origen (puedes restringirlo a tu dominio)
+    "Access-Control-Allow-Origin": "https://pmms-landing.netlify.app", // Permite solicitudes desde cualquier origen (puedes restringirlo a tu dominio)
     "Access-Control-Allow-Methods": "OPTIONS, POST", // Métodos permitidos
     "Access-Control-Allow-Headers": "Content-Type", // Encabezados permitidos
   };
