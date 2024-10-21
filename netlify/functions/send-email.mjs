@@ -5,21 +5,32 @@ const path = require("path");
 export default async (req, context) => {
   console.log(req);
   console.log(context);
-  const headers = {
-    "Access-Control-Allow-Origin": "https://pmms-landing.netlify.app", // Permite solicitudes desde cualquier origen (puedes restringirlo a tu dominio)
-    "Access-Control-Allow-Methods": "POST", // Métodos permitidos
-    "Access-Control-Allow-Headers": "Content-Type", // Encabezados permitidos
-  };
+
+  const res = new Response();
+
+  res.headers.set(
+    "Access-Control-Allow-Origin",
+    "https://pmms-landing.netlify.app"
+  );
+  res.headers.append("Access-Control-Allow-Headers", "*");
+  res.headers.append("Access-Control-Allow-Methods", "*");
+
   try {
     const { content, email, user, subject } = req.body;
 
     // Validación de datos
     if (!content || !email || !user || !subject) {
-      return {
-        statusCode: 400,
-        body: JSON.stringify({ error: "Faltan parámetros en la solicitud" }),
-        headers: headers,
-      };
+      return res(
+        JSON.stringify(
+          JSON.stringify(
+            { error: "Faltan parámetros en la solicitud" },
+            {
+              statusCode: 400,
+              headers: headers,
+            }
+          )
+        )
+      );
     }
 
     // Configuración del transportador (asegúrate de tener las variables de entorno configuradas)
@@ -58,21 +69,26 @@ export default async (req, context) => {
       html,
     });
 
-    return {
-      statusCode: 200,
-      body: JSON.stringify({
-        message: "Correo enviado exitosamente",
-        messageId: info.messageId,
-      }),
-    };
+    return res(
+      JSON.stringify(
+        {
+          message: "Correo enviado exitosamente",
+          messageId: info.messageId,
+        },
+        {
+          statusCode: 200,
+        }
+      )
+    );
   } catch (error) {
     console.error("Error al enviar el correo:", error);
-    return {
-      statusCode: 500,
-      body: JSON.stringify({
-        error: "Error al procesar la solicitud",
-        details: error.message,
-      }),
-    };
+    return res(
+      JSON.stringify(
+        { error: "Error al procesar la solicitud", details: error.message },
+        {
+          statusCode: 500,
+        }
+      )
+    );
   }
 };
