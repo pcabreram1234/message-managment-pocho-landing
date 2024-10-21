@@ -15,7 +15,7 @@ export default async (req, context) => {
       secure: true,
       auth: {
         user: "pcabreram1234@gmail.com",
-        pass: process.env.GOOGLE_APPLICATION_PASSWORD1,
+        pass: process.env.GOOGLE_APPLICATION_PASSWORD,
       },
     });
 
