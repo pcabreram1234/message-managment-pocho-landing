@@ -16,22 +16,23 @@ export default async (req, context) => {
   res.headers.append("Access-Control-Allow-Methods", "*");
 
   try {
-    const { content, email, user, subject } = req.body;
+    // const { content, email, user, subject } = req.body;
+    console.log(JSON.parse(req?.body));
 
     // Validación de datos
-    if (!content || !email || !user || !subject) {
-      return res(
-        JSON.stringify(
-          JSON.stringify(
-            { error: "Faltan parámetros en la solicitud" },
-            {
-              statusCode: 400,
-              headers: headers,
-            }
-          )
-        )
-      );
-    }
+    // if (!content || !email || !user || !subject) {
+    //   return res(
+    //     JSON.stringify(
+    //       JSON.stringify(
+    //         { error: "Faltan parámetros en la solicitud" },
+    //         {
+    //           statusCode: 400,
+    //           headers: headers,
+    //         }
+    //       )
+    //     )
+    //   );
+    // }
 
     // Configuración del transportador (asegúrate de tener las variables de entorno configuradas)
     const transporter = nodemailer.createTransport({
