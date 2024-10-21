@@ -12,7 +12,7 @@
   # This sample publishes the directory located at the absolute 
   # path "root/project/build-output"
 
-  publish = "dist/"
+  publish = "/dist"
 
   # Default build command.
   command = "npm run build"
@@ -151,7 +151,7 @@
   # Directory with serverless functions, including background
   # functions, to deploy. This is an absolute path relative to the 
   # base directory, which is the root by default (/).
-  directory = "netlify/functions/"
+  directory = "/netlify/functions/"
 
 # Use [dev] to set configuration overrides for local
 # development environments run using Netlify Dev - except
@@ -159,6 +159,6 @@
 # Dev should be set under [context.dev.environment] instead.
 [dev]
   command = "npm run dev"
-  #port = 8888
+  port = 8888
   publish = "dist"
 
