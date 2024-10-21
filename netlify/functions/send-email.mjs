@@ -7,11 +7,11 @@ export default async (req, context) => {
   console.log(context);
   const headers = {
     "Access-Control-Allow-Origin": "https://pmms-landing.netlify.app", // Permite solicitudes desde cualquier origen (puedes restringirlo a tu dominio)
-    "Access-Control-Allow-Methods": "OPTIONS, POST", // Métodos permitidos
+    "Access-Control-Allow-Methods": "POST", // Métodos permitidos
     "Access-Control-Allow-Headers": "Content-Type", // Encabezados permitidos
   };
   try {
-    const { content, email, user, subject } = event.body;
+    const { content, email, user, subject } = req.body;
 
     // Validación de datos
     if (!content || !email || !user || !subject) {
