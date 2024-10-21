@@ -20,7 +20,7 @@ export default defineConfig({
           "mail-template.html"
         );
         // Ruta de destino (dentro de la carpeta dist)
-        const destPath = path.resolve(__dirname, "dist/templates", "mail-template.html");
+        const destPath = path.resolve(__dirname, "dist", "template.html");
         try {
           // Copia el archivo template.html a la carpeta dist
           fs.copyFile(sourcePath, destPath, (err) => {
@@ -31,7 +31,7 @@ export default defineConfig({
               );
             }
           });
-        } catch (error) {
+        } catch (error) { 
           console.error("Error al copiar template.html:", error);
         }
       },
