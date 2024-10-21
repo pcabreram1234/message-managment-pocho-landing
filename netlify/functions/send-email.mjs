@@ -10,7 +10,7 @@ export default async (req, context) => {
 
   res.headers.set(
     "Access-Control-Allow-Origin",
-    "https://pmms-landing.netlify.app"
+    "https://6715b159db43ab0008f9a6d5--pmms-landing.netlify.app/"
   );
   res.headers.append("Access-Control-Allow-Headers", "*");
   res.headers.append("Access-Control-Allow-Methods", "*");
