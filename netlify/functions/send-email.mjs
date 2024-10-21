@@ -8,8 +8,9 @@ export default async (event, context) => {
     "Access-Control-Allow-Methods": "OPTIONS, POST", // Métodos permitidos
     "Access-Control-Allow-Headers": "Content-Type", // Encabezados permitidos
   };
+
   try {
-    const body = JSON.parse(body);
+    const body = JSON.parse(event?.body);
     console.log(body);
     const { content, email, user, subject } = event.body
       ? JSON.parse(event.body)
