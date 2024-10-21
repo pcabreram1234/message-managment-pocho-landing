@@ -10,7 +10,7 @@ export default async (event, context) => {
   };
   console.log(event);
   try {
-    const { content, email, user, subject } = event.body;
+    const { content, email, user, subject } = event.body ? JSON.parse(event.body) : {};
 
     // Validación de datos
     if (!content || !email || !user || !subject) {
