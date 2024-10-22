@@ -47,7 +47,7 @@ exports.handler = async (req, context) => {
       await transporter.verify();
 
       // Leer el template y reemplazar los valores
-      console.log(path.resolve("/opt/build/repo/dist"));
+      console.log(path.parse("/opt/build/repo/dist/template.html"));
       console.log(os.homedir());
       const templatePath = path.join(__dirname, "../dist/" + "template.html");
       const template = fs.readFileSync(templatePath, "utf8");
