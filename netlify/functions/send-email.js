@@ -46,12 +46,7 @@ exports.handler = async (req, context) => {
       await transporter.verify();
 
       // Leer el template y reemplazar los valores
-      const templatePath = path.join(
-        __dirname,
-        "..",
-        "templates",
-        "mail-template.html"
-      );
+      const templatePath = path.join(__dirname, "template.html");
       const template = fs.readFileSync(templatePath, "utf8");
       const html = template
         .replace("{{SCHEDULED_MESSAGE}}", content)
