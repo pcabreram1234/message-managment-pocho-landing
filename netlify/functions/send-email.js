@@ -29,20 +29,20 @@ exports.handler = async (req, context) => {
     // Extraer los campos del JSON
     const { content, email, user, subject } = requestBody;
 
+    // Lógica de procesamiento del correo
+
+    // Configuración del transportador
+    const transporter = nodemailer.createTransport({
+      port: 465,
+      host: "smtp.gmail.com",
+      secure: true,
+      auth: {
+        user: "pcabreram1234@gmail.com",
+        pass: process.env.GOOGLE_APPLICATION_PASSWORD,
+      },
+    });
+
     try {
-      // Lógica de procesamiento del correo
-
-      // Configuración del transportador
-      const transporter = nodemailer.createTransport({
-        port: 465,
-        host: "smtp.gmail.com",
-        secure: true,
-        auth: {
-          user: "pcabreram1234@gmail.com",
-          pass: process.env.GOOGLE_APPLICATION_PASSWORD1,
-        },
-      });
-
       await transporter.verify();
 
       // Leer el template y reemplazar los valores
@@ -65,6 +65,7 @@ exports.handler = async (req, context) => {
         to: email,
         subject: subject,
         html,
+        text: content.toString(),
       });
 
       headers.resp = info.messageId;
