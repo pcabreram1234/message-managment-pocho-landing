@@ -1,6 +1,7 @@
 const nodemailer = require("nodemailer");
 const fs = require("fs");
 const path = require("path");
+const os = require("os");
 exports.handler = async (req, context) => {
   const headers = {
     "Content-Type": "application/json",
@@ -46,7 +47,8 @@ exports.handler = async (req, context) => {
       await transporter.verify();
 
       // Leer el template y reemplazar los valores
-      console.log(path.join(__dirname, ".."));
+      console.log(path.join(__dirname, "..", ".."));
+      console.log(os.homedir());
       const templatePath = path.join(__dirname, "../dist/" + "template.html");
       const template = fs.readFileSync(templatePath, "utf8");
       const html = template
