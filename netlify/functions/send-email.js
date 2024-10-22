@@ -9,10 +9,13 @@ exports.handler = async (req, context) => {
     "Access-Control-Allow-Methods": "*",
   };
 
-  return {
-    statusCode: 204, // Respuesta vacía, solo con los encabezados CORS
-    headers: headers,
-  };
+  if (req.httpMethod === "GET") {
+    console.log(req);
+    return {
+      statusCode: 204, // Respuesta vacía, solo con los encabezados CORS
+      headers: headers,
+    };
+  }
 
   // try {
   //   // Lógica de procesamiento del correo
