@@ -17,6 +17,14 @@ exports.handler = async (req, context) => {
     };
   }
 
+  if (req.httpMethod === "POST") {
+    console.log(req);
+    return {
+      statusCode: 204, // Respuesta vacía, solo con los encabezados CORS
+      headers: headers,
+    };
+  }
+
   // try {
   //   // Lógica de procesamiento del correo
 
