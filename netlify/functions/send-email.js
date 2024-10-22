@@ -22,6 +22,7 @@ exports.handler = async (req, context) => {
     return {
       statusCode: 204, // Respuesta vacía, solo con los encabezados CORS
       headers: headers,
+      body: JSON.stringify(req.body),
     };
   }
 
