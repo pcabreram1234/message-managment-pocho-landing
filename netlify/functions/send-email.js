@@ -51,7 +51,7 @@ exports.handler = async (req, context) => {
       // console.log(os.homedir());
       
 
-      const template = fs.readFileSync("https://pmms.netlify.app/template.htm", "utf8");
+      const template = fs.readFileSync("https://pmms.netlify.app/template.html", "utf8");
       const html = template
         .replace("{{SCHEDULED_MESSAGE}}", content)
         .replace("{{User}}", user)
