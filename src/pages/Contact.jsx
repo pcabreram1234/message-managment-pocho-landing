@@ -19,18 +19,22 @@ const Contact = () => {
   const handleSubmit = () => {
     fetch("https://pmms-landing.netlify.app/.netlify/functions/send-email", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
+      // headers: {
+      //   "Content-Type": "application/json",
+      // },
       body: JSON.stringify({
         content: "Contenido del correo",
         email: "pcabreram1234@gmail.com",
         user: "Tu nombre",
         subject: "Asunto del correo",
       }),
-    }).then((resp) => {
-      console.log(resp);
-    });
+    })
+      .then((resp) => {
+        return resp.json();
+      })
+      .then((resp) => {
+        console.log(resp);
+      });
   };
   return (
     <Layout style={{ height: "100%" }}>
