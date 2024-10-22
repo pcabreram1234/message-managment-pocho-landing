@@ -47,8 +47,8 @@ exports.handler = async (req, context) => {
       await transporter.verify();
 
       // Leer el template y reemplazar los valores
-      console.log(path.parse("/opt/build/repo/dist/template.html"));
-      console.log(os.homedir());
+      // console.log(path.parse("/opt/build/repo/dist/template.html"));
+      // console.log(os.homedir());
       
 
       const template = fs.readFileSync("https://pmms.netlify.app/template.htm", "utf8");
