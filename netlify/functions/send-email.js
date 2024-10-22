@@ -49,13 +49,13 @@ exports.handler = async (req, context) => {
       // Leer el template y reemplazar los valores
       // console.log(path.parse("/opt/build/repo/dist/template.html"));
       // console.log(os.homedir());
-      
-
-      const template = fs.readFileSync("https://pmms.netlify.app/template.html", "utf8");
+      const siteDir = path.join(__dirname, "../dist"); // Ajusta el nombre de la carpeta si es necesario
+      const templateFilePath = path.join(siteDir, "template.html"); // Ruta al archivo dentro de la carpeta 'public'
+      const template = fs.readFileSync(templateFilePath, "utf8");
       const html = template
         .replace("{{SCHEDULED_MESSAGE}}", content)
         .replace("{{User}}", user)
-        .replace("{{Subject}}", subject)  
+        .replace("{{Subject}}", subject)
         .replace("{{Email}}", email);
 
       // Enviar el correo
