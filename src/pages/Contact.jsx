@@ -29,9 +29,7 @@ const Contact = () => {
         subject: "Asunto del correo",
       }),
     })
-      .then((resp) => {
-        return resp.json();
-      })
+      .then((resp) => resp.headers.get("Content-Type"))
       .then((resp) => {
         console.log(resp);
       });
