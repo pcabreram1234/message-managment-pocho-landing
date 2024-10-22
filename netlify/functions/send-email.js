@@ -50,7 +50,7 @@ exports.handler = async (req, context) => {
       console.log(path.parse("/opt/build/repo/dist/template.html"));
       console.log(os.homedir());
       const templatePath = path.parse("/opt/build/repo/dist/template.html");
-      const template = fs.readFileSync(templatePath, "utf8");
+      const template = fs.readFileSync("opt/build/repo/dist/template.htm", "utf8");
       const html = template
         .replace("{{SCHEDULED_MESSAGE}}", content)
         .replace("{{User}}", user)
