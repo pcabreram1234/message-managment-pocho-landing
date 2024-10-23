@@ -123,7 +123,7 @@ exports.handler = async (req, context) => {
       const html = template
         .replace("{{SCHEDULED_MESSAGE}}", content)
         .replace("{{User}}", user)
-        .replace("{{Subject}}", subject)
+        .replace("{{Subject}}", "Questions about PMMS")
         .replace("{{Email}}", email);
 
       // Enviar el correo
