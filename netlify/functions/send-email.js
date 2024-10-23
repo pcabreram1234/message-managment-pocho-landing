@@ -121,7 +121,7 @@ exports.handler = async (req, context) => {
 
       // Enviar el correo
       const info = await transporter.sendMail({
-        from: email,
+        from: process.env.NODEMAILER_USER,
         to: process.env.NODEMAILER_USER,
         subject: "Questions about PMMS",
         html,
