@@ -22,35 +22,28 @@ exports.handler = async (req, context) => {
   }
 
   if (req.httpMethod === "POST") {
-    console.log(req);
-
     // Parsear el body JSON
     const requestBody = JSON.parse(req.body);
 
     // Extraer los campos del JSON
-    const { content, email, user, subject } = requestBody;
+    const { content, email, user } = requestBody;
 
     // Lógica de procesamiento del correo
 
     // Configuración del transportador
     const transporter = nodemailer.createTransport({
       port: 465,
-      host: "smtp.gmail.com",
+      host: process.env.NODEMAILER_HOST,
       secure: true,
       auth: {
-        user: "pcabreram1234@gmail.com",
-        pass: process.env.GOOGLE_APPLICATION_PASSWORD,
+        user: process.env.NODEMAILER_USER,
+        pass: process.env.NODEMAILER_USER_PASSWORD,
       },
     });
 
     try {
       await transporter.verify();
 
-      // Leer el template y reemplazar los valores
-      // console.log(path.parse("/opt/build/repo/dist/template.html"));
-      // console.log(os.homedir());
-      const siteDir = path.join(__dirname, "../../dist"); // Ajusta el nombre de la carpeta si es necesario
-      const templateFilePath = path.join(siteDir, "template.html"); // Ruta al archivo dentro de la carpeta 'public'
       const template = `<!DOCTYPE html>
 <html lang="es">
 <head>
@@ -116,10 +109,6 @@ exports.handler = async (req, context) => {
     </div>
     
     <p>Please review the message and provide a response as soon as possible.</p>
-    
-    <div class="footer">
-    <p>Thank you for using <strong>[SaaS Name]</strong>. If you need further assistance, you can contact us at <a href="mailto:support@[domain].com">support@[domain].com</a>.</p>
-    </div>
   </div>
 </body>
 </html>
@@ -132,9 +121,9 @@ exports.handler = async (req, context) => {
 
       // Enviar el correo
       const info = await transporter.sendMail({
-        from: process.env.NODEMAILER_FROM,
-        to: email,
-        subject: subject,
+        from: email,
+        to: process.env.NODEMAILER_USER,
+        subject: "Questions about PMMS",
         html,
         text: content.toString(),
       });

@@ -1,39 +1,85 @@
-import React, { useState } from "react";
-import { Layout, Form, Row, Col, Typography, Input, Space, Button } from "antd";
-import { SendOutlined } from "@ant-design/icons";
+import React, { useEffect, useState } from "react";
+import {
+  Layout,
+  Form,
+  Row,
+  Col,
+  Typography,
+  Input,
+  Space,
+  Button,
+  Result,
+  Alert,
+} from "antd";
+import { SendOutlined, InfoCircleTwoTone } from "@ant-design/icons";
 import "../styles/Contact.css";
 
 const Contact = () => {
+  const [form] = Form.useForm();
   const { Content, Header } = Layout;
   const { Title, Text } = Typography;
   const { TextArea } = Input;
-
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [message, setMessage] = useState("");
+  const [content, setContent] = useState("");
+  const [showStatusMessage, setShowStatusMessage] = useState(false);
+  const [showAlert, setShowAlert] = useState(false);
+  const [disabled, setDisabled] = useState(false);
 
   const handleInput = (e, cb) => {
     cb(e.target.value);
   };
 
-  const handleSubmit = () => {
-    fetch("https://pmms-landing.netlify.app/.netlify/functions/send-email", {
-      method: "POST",
-      // headers: {
-      //   "Content-Type": "application/json",
-      // },
-      body: JSON.stringify({
-        content: "Contenido del correo",
-        email: "pcabreram1234@gmail.com",
-        user: "Tu nombre",
-        subject: "Asunto del correo",
-      }),
-    })
-      .then((resp) => resp.headers.get("Content-Type"))
-      .then((resp) => {
-        console.log(resp);
-      });
+  const clearForm = () => {
+    form.resetFields();
+    setName("");
+    setEmail("");
+    setContent("");
   };
+
+  const handleSubmit = () => {
+    form.validateFields().then(() => {
+      setDisabled(true);
+      fetch("https://pmms-landing.netlify.app/.netlify/functions/send-email", {
+        method: "POST",
+        body: JSON.stringify({
+          content: content,
+          email: email,
+          user: name,
+        }),
+      })
+        .then((resp) => {
+          const statusCode = resp.status;
+          if (statusCode === 204) {
+            setShowStatusMessage(true);
+            clearForm();
+          } else {
+            setShowAlert(true);
+          }
+        })
+        .catch((err) => {
+          setShowAlert(true);
+        });
+    });
+  };
+
+  useEffect(() => {
+    if (showStatusMessage === true) {
+      setTimeout(() => {
+        setShowStatusMessage(false);
+        setDisabled(false);
+      }, 3000);
+    }
+  }, [showStatusMessage]);
+
+  useEffect(() => {
+    if (showAlert === true) {
+      setTimeout(() => {
+        setShowAlert(false);
+        setDisabled(false);
+      }, 3000);
+    }
+  }, [showAlert]);
   return (
     <Layout style={{ height: "100%" }}>
       <Header style={{ backgroundColor: "transparent", textAlign: "center" }}>
@@ -49,7 +95,7 @@ const Contact = () => {
           className="ContactContainer"
         >
           <Col span={12} className="Form_Col">
-            <Form style={{ marginTop: "10%" }} size="large">
+            <Form style={{ marginTop: "10%" }} size="large" form={form}>
               <Form.Item
                 name={"name"}
                 rules={[
@@ -63,6 +109,7 @@ const Contact = () => {
                 required
               >
                 <Input
+                  autoFocus={true}
                   type={"text"}
                   value={name}
                   placeholder="Your name"
@@ -101,14 +148,14 @@ const Contact = () => {
                     min: 10,
                   },
                 ]}
-                initialValue={message}
+                initialValue={content}
                 required
               >
                 <TextArea
                   placeholder="Your message"
-                  value={message}
+                  value={content}
                   onChange={(e) => {
-                    handleInput(e, setMessage);
+                    handleInput(e, setContent);
                   }}
                   style={{ height: "150px" }}
                 />
@@ -122,11 +169,44 @@ const Contact = () => {
                   size="large"
                   style={{ borderRadius: "10px" }}
                   onClick={handleSubmit}
+                  disabled={disabled}
                 >
                   Send Message
                 </Button>
               </Form.Item>
             </Form>
+            {showStatusMessage && (
+              <Result
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+                icon={false}
+                subTitle={
+                  <Text
+                    // type="success"
+                    strong
+                    style={{
+                      backgroundColor: "#6166E4",
+                      padding: "10px",
+                      borderRadius: "2px",
+                      color: "#fefedf",
+                    }}
+                  >
+                    <InfoCircleTwoTone /> "Message Sended successfully We will
+                    be contacting you shortly to resolve your questions.."
+                  </Text>
+                }
+              />
+            )}
+
+            {showAlert && (
+              <Alert
+                type="error"
+                message="It looks like we were unable to process your request at this time. If you require urgent assistance, we invite you to email us directly at contact@phillipcabrera.com. We appreciate your understanding and are here to help."
+              />
+            )}
           </Col>
 
           <Col span={10} className="Text_Col">
