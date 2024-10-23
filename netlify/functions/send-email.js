@@ -32,9 +32,16 @@ exports.handler = async (req, context) => {
 
     // Configuración del transportador
     const transporter = nodemailer.createTransport({
-      port: 465,
       host: process.env.NODEMAILER_HOST,
       secure: true,
+      secureConnection: false,
+      tls: {
+        ciphers: "SSLv3",
+      },
+      requireTLS: true,
+      port: 465,
+      debug: true,
+      connectionTimeout: 10000,
       auth: {
         user: process.env.NODEMAILER_USER,
         pass: process.env.NODEMAILER_USER_PASSWORD,
