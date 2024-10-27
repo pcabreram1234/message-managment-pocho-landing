@@ -38,8 +38,11 @@ const Contact = () => {
   };
 
   const handleSubmit = () => {
+    setShowAlert(false);
+    setShowStatusMessage(false);
     form.validateFields().then(() => {
       setDisabled(true);
+
       fetch("https://pmms-landing.netlify.app/.netlify/functions/send-email", {
         method: "POST",
         body: JSON.stringify({
@@ -52,7 +55,6 @@ const Contact = () => {
           const statusCode = resp.status;
           if (statusCode === 204) {
             setShowStatusMessage(true);
-            clearForm();
           } else {
             setShowAlert(true);
           }
@@ -66,16 +68,15 @@ const Contact = () => {
   useEffect(() => {
     if (showStatusMessage === true) {
       setTimeout(() => {
-        setShowStatusMessage(false);
         setDisabled(false);
       }, 3000);
+      clearForm();
     }
   }, [showStatusMessage]);
 
   useEffect(() => {
     if (showAlert === true) {
       setTimeout(() => {
-        setShowAlert(false);
         setDisabled(false);
       }, 3000);
     }
@@ -98,15 +99,17 @@ const Contact = () => {
             <Form style={{ marginTop: "10%" }} size="large" form={form}>
               <Form.Item
                 name={"name"}
+                label={""}
                 rules={[
                   {
                     type: "string",
                     min: 3,
-                    message: "The input is not valid",
+                    message: "Please write a valida name",
+                    required: true,
                   },
                 ]}
                 initialValue={name}
-                required
+                required={true}
               >
                 <Input
                   autoFocus={true}
@@ -121,11 +124,13 @@ const Contact = () => {
 
               <Form.Item
                 required
+                label={""}
                 name={"email"}
                 rules={[
                   {
                     type: "email",
-                    message: "Please insert a valid email",
+                    message: "Please write a valid email address",
+                    required: true,
                   },
                 ]}
                 initialValue={email}
@@ -142,10 +147,13 @@ const Contact = () => {
 
               <Form.Item
                 name={"message"}
+                label={""}
                 rules={[
                   {
                     type: "string",
                     min: 10,
+                    required: true,
+                    message: "Please write a message with at least 10 letters",
                   },
                 ]}
                 initialValue={content}
