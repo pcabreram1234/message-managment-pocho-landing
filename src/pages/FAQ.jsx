@@ -26,8 +26,7 @@ const FAQ = () => {
               <ul className="faq_list">
                 <li>
                   <Text>
-                    You only need an email account and create a username. How do
-                    I set up categories for my messages?
+                    You only need an email account and create a username.
                   </Text>
                 </li>
               </ul>
