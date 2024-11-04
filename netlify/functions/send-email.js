@@ -5,9 +5,9 @@ const os = require("os");
 exports.handler = async (req, context) => {
   const headers = {
     "Content-Type": "application/json",
-    "Access-Control-Allow-Origin": "https://6728389ff6aa740008d84207--pmms-landing.netlify.app",
+    "Access-Control-Allow-Origin": "https://6728371d2a603ecb6b801d22--pmms-landing.netlify.app",
     "Access-Control-Allow-Headers": "*",
-    "Access-Control-Allow-Methods": "GET",
+    "Access-Control-Allow-Methods": "*",
     "Content-Type": "application/json",
     resp: "",
     error: "",
