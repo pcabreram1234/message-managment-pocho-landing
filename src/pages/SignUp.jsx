@@ -12,19 +12,27 @@ import {
   Image,
 } from "antd";
 import RegisterIcon from "../assets/Message assets/undraw_sign_in_re_o58h.svg";
+import PopUpModal from "../components/PopUpModal";
 
 const SignUp = () => {
   const { Content } = Layout;
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [disabledSubmitButton, setDisabledSubmitButton] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [alertModalType, setAlertModalType] = useState("info");
+  const [modalMessage, setModalMessage] = useState(
+    "Please wait, we are sending you an email confirmation"
+  );
+  const [modalInfoText, setModalInfoText] = useState("Saving user");
   const { Text } = Typography;
   const [form] = Form.useForm();
 
   const handleSignUp = () => {
     // Muestra el mensaje inicial
-    const loadingMessage = message.loading("Creating user, please wait", 0); // El 0 hace que el mensaje no se cierre automáticamente
+    // const loadingMessage = message.loading("Creating user, please wait", 0); // El 0 hace que el mensaje no se cierre automáticamente
 
     setDisabledSubmitButton(true);
+    setShowModal(true);
 
     // Realiza la solicitud API
     fetch(import.meta.env.VITE_SIGNUP_UL, {
@@ -44,25 +52,35 @@ const SignUp = () => {
         // Al finalizar la solicitud, destruye el mensaje de carga
 
         if (error) {
-          message.error(error);
-          loadingMessage(); // Cierra el mensaje de carga
+          setAlertModalType("error");
+          setModalMessage(error);
+          setModalInfoText("Error");
+          // message.error(error);
+          // loadingMessage(); // Cierra el mensaje de carga
         }
 
         if (messageStatus === "sended") {
-          message.success(
-            "Registered successfully! Please verify your email inbox"
-          );
-          loadingMessage(); // Cierra el mensaje de carga
+          setAlertModalType("success");
+          setModalMessage("User Saved!");
+          setModalInfoText("Registered successfully! Please verify your email inbox");
+          // message.success(
+          //   "Registered successfully! Please verify your email inbox"
+          // );
+          // loadingMessage(); // Cierra el mensaje de carga
           form.resetFields();
         }
       })
       .catch((error) => {
         console.error("Error:", error);
-        loadingMessage(); // Cierra el mensaje de carga en caso de error
-        message.error("An error occurred during registration."); // Muestra un mensaje de error genérico
+        setAlertModalType("error");
+        setModalMessage(error);
+        setModalInfoText("Error");
+        // loadingMessage(); // Cierra el mensaje de carga en caso de error
+        // message.error("An error occurred during registration."); // Muestra un mensaje de error genérico
       })
       .finally(() => {
         setDisabledSubmitButton(false);
+        // setShowModal(false)
       });
   };
 
@@ -161,6 +179,16 @@ const SignUp = () => {
             />
           </Form.Item>
         </Form>
+
+        {showModal && (
+          <PopUpModal
+            isModalVisible={showModal}
+            cb={setShowModal}
+            alertModalType={alertModalType}
+            modalInfoText={modalInfoText}
+            modalMessage={modalMessage}
+          />
+        )}
       </Content>
     </Layout>
   );
