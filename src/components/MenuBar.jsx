@@ -77,6 +77,26 @@ const MenuBar = () => {
       <Menu.Item onClick={handleMenuClick}>
         <GetStartedButton />
       </Menu.Item>
+
+      <Menu.Item
+        onClick={handleMenuClick}
+        style={{ height: "auto", backgroundColor: "transparent" }}
+      >
+        <a
+          href="https://www.producthunt.com/products/pmms/reviews?utm_source=badge-product_review&utm_medium=badge&utm_souce=badge-pmms"
+          target="_blank"
+          style={{ display: "flex", alignItems: "center" }}
+        >
+          <Image
+            src="https://api.producthunt.com/widgets/embed-image/v1/product_review.svg?product_id=856248&theme=light"
+            alt="PMMS - Pocho&#0096;s&#0032;messages&#0032;managment&#0032;system | Product Hunt"
+            style={{ width: "210px", height: "50px" }}
+            width="200"
+            height="50"
+            preview={false}
+          />
+        </a>
+      </Menu.Item>
     </>
   );
 
