@@ -6,11 +6,11 @@ import {
   Form,
   Input,
   Button,
-  message,
   Space,
   Anchor,
   Image,
 } from "antd";
+import { useNavigate } from "react-router";
 import RegisterIcon from "../assets/Message assets/undraw_sign_in_re_o58h.svg";
 import PopUpModal from "../components/PopUpModal";
 
@@ -26,64 +26,59 @@ const SignUp = () => {
   const [modalInfoText, setModalInfoText] = useState("Saving user");
   const { Text } = Typography;
   const [form] = Form.useForm();
+  const navigate = useNavigate();
 
-  const handleSignUp = () => {
-    // Muestra el mensaje inicial
-    // const loadingMessage = message.loading("Creating user, please wait", 0); // El 0 hace que el mensaje no se cierre automáticamente
+  const resetPopUpModal = async () => {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        setShowModal(true);
+        setAlertModalType("info");
+        setModalMessage(
+          "Please wait, we are sending you an email confirmation"
+        );
+        resolve();
+      }, 100);
+    });
+  };
 
+  const handleSignUp = async () => {
     setDisabledSubmitButton(true);
-    setShowModal(true);
+    await resetPopUpModal();
 
-    // Realiza la solicitud API
-    fetch(import.meta.env.VITE_SIGNUP_UL, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email: form.getFieldValue("email"),
-        password: form.getFieldValue("password"),
-      }),
-    })
-      .then((response) => response.json())
-      .then((resp) => {
-        const { error, messageStatus } = resp;
-        console.log(resp);
-        // Al finalizar la solicitud, destruye el mensaje de carga
+    try {
+      const response = await fetch(import.meta.env.VITE_SIGNUP_UL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: form.getFieldValue("email"),
+          password: form.getFieldValue("password"),
+        }),
+      });
 
-        if (error) {
-          setAlertModalType("error");
-          setModalMessage(error);
-          setModalInfoText("Error");
-          // message.error(error);
-          // loadingMessage(); // Cierra el mensaje de carga
-        }
+      const resp = await response.json();
+      const { error, messageStatus } = resp;
 
-        if (messageStatus === "sended") {
-          setAlertModalType("success");
-          setModalMessage("User Saved!");
-          setModalInfoText("Registered successfully! Please verify your email inbox");
-          // message.success(
-          //   "Registered successfully! Please verify your email inbox"
-          // );
-          // loadingMessage(); // Cierra el mensaje de carga
-          form.resetFields();
-        }
-      })
-      .catch((error) => {
-        console.error("Error:", error);
+      if (error) {
         setAlertModalType("error");
         setModalMessage(error);
         setModalInfoText("Error");
-        // loadingMessage(); // Cierra el mensaje de carga en caso de error
-        // message.error("An error occurred during registration."); // Muestra un mensaje de error genérico
-      })
-      .finally(() => {
-        setDisabledSubmitButton(false);
-        // setShowModal(false)
-      });
+      } else if (messageStatus === "sended") {
+        setAlertModalType("success");
+        setModalMessage("Email confirmation sent successfully!");
+        setModalInfoText("Success");
+        navigate("/verification");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      setAlertModalType("error");
+      setModalMessage("An error occurred while creating your account.");
+      setModalInfoText("Error");
+    } finally {
+      setDisabledSubmitButton(false);
+    }
   };
-
   return (
     <Layout>
       <Content

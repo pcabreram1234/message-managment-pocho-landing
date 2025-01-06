@@ -22,7 +22,7 @@ const PopUpModal = ({
   useEffect(() => {
     setTimeout(() => {
       handleClose();
-    }, 2000);
+    }, 10000);
   }, []);
 
   return (
