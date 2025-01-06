@@ -6,6 +6,7 @@ import Princing from "../pages/Pricing";
 import FAQ from "../pages/FAQ";
 import FooterPage from "../containers/Footer";
 import SignUp from "../pages/SignUp";
+import VerificationPage from "../pages/VerificationPage";
 import { Route, Routes } from "react-router-dom";
 import { Layout } from "antd";
 const App = () => {
